@@ -1,9 +1,15 @@
 import { useState } from "react";
+import DisplayDiaryCard from "./components/DisplayDiaryCard";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  return <h1>Personal Diary</h1>;
+  return (
+    <div>
+      <Diary />
+      <DisplayDiaryCard />
+    </div>
+  );
 }
 
 export default App;
