@@ -1,8 +1,10 @@
+import Model from "react-modal";
 import { useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
 import DiaryForm from "./components/DiaryForm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import DiaryInfo from "./components/DiaryInfo";
 
 const diaryList = [
   {
@@ -40,11 +42,20 @@ function App() {
     <div className="bg-slate-200 text-gray-100 flex flex-col h-screen">
       <Navbar setOpenPopup={setOpenPopup} />
       <main className="flex flex-col">
-        <DiaryForm
-          openPopup={openPopup}
-          setDiary={setDiary}
-          setOpenPopup={setOpenPopup}
-        />
+        <Model
+          isOpen={openPopup}
+          onRequestClose={() => setOpenPopup(false)}
+          style={{
+            overlay: { background: "black" },
+            content: { width: "1140px", height: "550px" },
+          }}
+        >
+          <DiaryForm
+            openPopup={openPopup}
+            setDiary={setDiary}
+            setOpenPopup={setOpenPopup}
+          />
+        </Model>
         <DisplayDiaryCard diary={diary} />
       </main>
       <Footer />

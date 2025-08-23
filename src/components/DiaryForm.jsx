@@ -25,20 +25,18 @@ const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
         return updateDiary;
       });
       setFormDiary({ title: "", newDate: "", imgUrl: "", message: "" });
-      setOpenPopup((prev) => {
-        return !prev;
-      });
+      setOpenPopup(false);
     } catch (error) {
       alert(error.message || "Something went wrong");
     }
   };
 
   return (
-    <div className="bg-white flex justify-center pt-[3.7rem] text-black">
+    <div className="bg-white flex justify-center mr-[5rem] py-15 text-black">
       {openPopup && (
         <form
           onSubmit={handleSubmit}
-          className="items-start flex flex-col gap-y-1 w-1/3"
+          className="items-start flex flex-col gap-y-5 w-2/3"
         >
           <label className="flex flex-row items-center justify-center w-full">
             <span className="text-ms  text-center w-[5rem]">Title</span>
@@ -83,12 +81,19 @@ const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
               className="flex-1 border rounded px-2 py-2 text-sm w-full h-[8rem]"
             ></textarea>
           </label>
-          <div className="flex flex-row justify-center pl-[5rem] w-full">
+          <div className="flex flex-row justify-center gap-x-10 ml-[3em] w-full">
+            <buttton
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400 active:bg-red-300"
+              onClick={() => setOpenPopup(false)}
+            >
+              {" "}
+              Cancel
+            </buttton>
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded"
             >
-              Add New Diary
+              Add Diary
             </button>
           </div>
         </form>
