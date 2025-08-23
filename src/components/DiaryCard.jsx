@@ -7,7 +7,7 @@ const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
   return (
     <li className="mb-3 w-1/3  ">
       <button
-        className="bg-blue-400 w-full p-4 rounded-4xl hover:bg-blue-300"
+        className="bg-blue-400 w-full p-4 rounded-4xl hover:bg-blue-300 cursor-pointer"
         onClick={() => setOpenInfo(true)}
       >
         <p>{newDate}</p>
