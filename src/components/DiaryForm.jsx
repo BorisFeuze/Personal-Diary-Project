@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
   const [formDiary, setFormDiary] = useState({
     title: "",
@@ -7,6 +7,14 @@ const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
     imgUrl: "",
     message: "",
   });
+  const isValidUrl = (testUrl) => {
+    try {
+      new URL(testUrl);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
   const handleChange = (event) => {
     console.log(event.target.value);
     setFormDiary((prev) => {
@@ -17,8 +25,17 @@ const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
+      if (!formDiary.title.trim()) throw new Error("Title is required");
+      if (!formDiary.newDate.trim()) throw new Error("Date is required");
+      if (!formDiary.imgUrl.trim()) {
+        throw new Error("Image is required");
+      } else if (!isValidUrl(imgUrl))
+        throw new Error("Image must be a valid URL");
+      if (!formDiary.message.trim()) throw new Error("massage is required");
+
       const newDiary = { _id: Date.now(), ...formDiary };
       console.log(newDiary);
+      toast.success("You have successfull added a new Diary");
       setDiary((prev) => {
         const updateDiary = [newDiary, ...prev];
         localStorage.setItem("diaryList", JSON.stringify(updateDiary));

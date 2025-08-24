@@ -6,7 +6,7 @@ const Navbar = ({ setOpenPopup }) => {
         <h1>Personal Diary</h1>
       </div>
       <button
-        className="bg-amber-400 hover:bg-amber-300 active:bg-amber-200 border-1 border-black p-[0.5rem] rounded-xl cursor-pointer"
+        className="bg-amber-400 hover:bg-amber-300 active:bg-amber-200 border-1 border-black p-[0.5rem] rounded cursor-pointer"
         onClick={() => setOpenPopup(true)}
       >
         New Diary
