@@ -1,4 +1,4 @@
-const Navbar = ({ setOpenPopup }) => {
+const Navbar = ({ setOpenPopup, openNewDiary }) => {
   return (
     <nav className="bg-blue-200 flex justify-between px-[5rem] items-center font-bold py-[1rem] text-green-800 fixed w-full">
       <div>
@@ -6,8 +6,14 @@ const Navbar = ({ setOpenPopup }) => {
         <h1>Personal Diary</h1>
       </div>
       <button
-        className="bg-amber-400 hover:bg-amber-300 active:bg-amber-200 border-1 border-black p-[0.5rem] rounded cursor-pointer"
-        onClick={() => setOpenPopup(true)}
+        className={`${
+          openNewDiary
+            ? "bg-amber-400 hover:bg-amber-300 active:bg-amber-200 cursor-pointer"
+            : "bg-gray-300 text-gray-600 cursor-not-allowed"
+        } border-1 border-black p-[0.5rem] rounded`}
+        onClick={
+          openNewDiary ? () => setOpenPopup(true) : () => setOpenPopup(null)
+        }
       >
         New Diary
       </button>

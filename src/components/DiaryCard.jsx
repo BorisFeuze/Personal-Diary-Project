@@ -3,15 +3,25 @@ import Model from "react-modal";
 import DiaryInfo from "./DiaryInfo";
 const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
   const [openInfo, setOpenInfo] = useState(false);
-  console.log(title);
   return (
-    <li className="mb-3 w-1/3  ">
+    <li className="mb-3">
       <button
         className="bg-blue-400 w-full p-4 rounded-4xl hover:bg-blue-300 cursor-pointer"
         onClick={() => setOpenInfo(true)}
       >
-        <p>{newDate}</p>
-        <h2 className="font-bold text-black">{title}</h2>
+        <div className="flex flex-row justify-center items-center px-[4rem]">
+          <div className="w-[9rem]">
+            <img
+              className="w-full h-auto object-cover"
+              src={imgUrl}
+              alt={title}
+            />
+          </div>
+          <div className="w-full">
+            <p className="text-sm">{newDate}</p>
+            <h2 className="font-bold text-black">{title}</h2>
+          </div>
+        </div>
       </button>
       <Model
         isOpen={openInfo}

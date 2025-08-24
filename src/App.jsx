@@ -1,10 +1,11 @@
 import Model from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
 import DiaryForm from "./components/DiaryForm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import DiaryInfo from "./components/DiaryInfo";
+import { toast, ToastContainer } from "react-toastify";
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 const diaryList = [
   {
@@ -31,16 +32,37 @@ const diaryList = [
 ];
 
 function App() {
+  const today = dayjs();
+  // const diff = 0;
   const [diary, setDiary] = useState(
     JSON.parse(localStorage.getItem("diaryList")) || []
   );
   const [openPopup, setOpenPopup] = useState(false);
+  const [openNewDiary, setOpenNewDiary] = useState(true);
+  const [saveDiary, setSaveDiary] = useState(today);
 
-  console.log(diary);
+  useEffect(() => {
+    console.log(today);
+    const newDate = today.add(1, "day");
+    console.log(newDate);
+    setSaveDiary(newDate);
+    // diff = saveDiary - today;
+    // console.log(diff);
+    return () => {};
+  }, [diary]);
+
+  // if (diff < 0) {
+  //   setOpenNewDiary(true);
+  // } else {
+  //   toast.error(
+  //     `For today it is not possible to save new Diary, Please come again tomorrow`
+  //   );
+  //   setOpenNewDiary(false);
+  // }
 
   return (
     <div className="bg-slate-200 text-gray-100 flex flex-col h-screen">
-      <Navbar setOpenPopup={setOpenPopup} />
+      <Navbar setOpenPopup={setOpenPopup} openNewDiary={openNewDiary} />
       <main className="flex flex-col">
         <Model
           isOpen={openPopup}
@@ -59,6 +81,7 @@ function App() {
         <DisplayDiaryCard diary={diary} />
       </main>
       <Footer />
+      <ToastContainer position="top-center" />
     </div>
   );
 }
