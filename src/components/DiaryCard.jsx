@@ -4,13 +4,13 @@ import DiaryInfo from "./DiaryInfo";
 const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
   const [openInfo, setOpenInfo] = useState(false);
   return (
-    <li className="mb-3">
+    <li className="mb-3 w-[35rem] h-[]">
       <button
         className="bg-blue-400 w-full p-4 rounded-4xl hover:bg-blue-300 cursor-pointer"
         onClick={() => setOpenInfo(true)}
       >
         <div className="flex flex-row justify-center items-center px-[4rem]">
-          <div className="w-[9rem]">
+          <div className="w-[7rem]">
             <img
               className="w-full h-auto object-cover"
               src={imgUrl}

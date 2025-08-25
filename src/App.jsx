@@ -32,53 +32,62 @@ const diaryList = [
 ];
 
 function App() {
-  const today = dayjs();
-  // const diff = 0;
   const [diary, setDiary] = useState(
     JSON.parse(localStorage.getItem("diaryList")) || []
   );
   const [openPopup, setOpenPopup] = useState(false);
-  const [openNewDiary, setOpenNewDiary] = useState(true);
-  const [saveDiary, setSaveDiary] = useState(today);
+  const [canAccess, setCanAccess] = useState(false);
+  const [message, setMessage] = useState("");
+  console.log(message);
+  console.log(canAccess);
+  console.log(diary);
 
   useEffect(() => {
-    console.log(today);
-    const newDate = today.add(1, "day");
-    console.log(newDate);
-    setSaveDiary(newDate);
-    // diff = saveDiary - today;
-    // console.log(diff);
-    return () => {};
+    let timeOut = 0;
+    const onedayInS = 5000;
+    // const onedayInS = 1 * 24 * 60 * 60 * 1000;
+    if (timeOut) {
+      setCanAccess(false);
+      setMessage(
+        "You can save your Diary only once per day, please come black tomorrow"
+      );
+      toast.error(message);
+    } else {
+      clearTimeout(timeOut);
+      timeOut = setTimeout(() => {
+        setCanAccess(true);
+      }, onedayInS);
+    }
   }, [diary]);
-
-  // if (diff < 0) {
-  //   setOpenNewDiary(true);
-  // } else {
-  //   toast.error(
-  //     `For today it is not possible to save new Diary, Please come again tomorrow`
-  //   );
-  //   setOpenNewDiary(false);
-  // }
 
   return (
     <div className="bg-slate-200 text-gray-100 flex flex-col h-screen">
-      <Navbar setOpenPopup={setOpenPopup} openNewDiary={openNewDiary} />
+      <Navbar setOpenPopup={setOpenPopup} canAccess={canAccess} />
+
       <main className="flex flex-col">
-        <Model
-          isOpen={openPopup}
-          onRequestClose={() => setOpenPopup(false)}
-          style={{
-            overlay: { background: "black" },
-            content: { width: "1140px", height: "550px" },
-          }}
-        >
-          <DiaryForm
-            openPopup={openPopup}
-            setDiary={setDiary}
-            setOpenPopup={setOpenPopup}
-          />
-        </Model>
-        <DisplayDiaryCard diary={diary} />
+        {canAccess ? (
+          <Model
+            isOpen={openPopup}
+            onRequestClose={() => setOpenPopup(false)}
+            style={{
+              overlay: { background: "black" },
+              content: { width: "1140px", height: "550px" },
+            }}
+          >
+            <DiaryForm
+              openPopup={openPopup}
+              setDiary={setDiary}
+              setOpenPopup={setOpenPopup}
+            />
+          </Model>
+        ) : (
+          <h1>{message}</h1>
+        )}
+        <DisplayDiaryCard
+          diary={diary}
+          message={message}
+          canAccess={canAccess}
+        />
       </main>
       <Footer />
       <ToastContainer position="top-center" />
