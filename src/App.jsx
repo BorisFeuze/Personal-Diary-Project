@@ -5,31 +5,7 @@ import DiaryForm from "./components/DiaryForm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { toast, ToastContainer } from "react-toastify";
-import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-
-const diaryList = [
-  {
-    _id: Date.now(),
-    title: "learn React",
-    date: "2025-08-23",
-    imgUrl: "",
-    content: "i have to finish my project today",
-  },
-  {
-    _id: Date.now(),
-    title: "learn JavaScript",
-    date: "2025-08-22",
-    imgUrl: "",
-    content: "please read all the array-method",
-  },
-  {
-    _id: Date.now(),
-    title: "learn HTML & CSS",
-    date: "2025-08-21",
-    imgUrl: "",
-    content: "please read all about Grip & Flex",
-  },
-];
+import ErrorMessage from "./components/ErrorMessage";
 
 function App() {
   const [diary, setDiary] = useState(
@@ -38,33 +14,30 @@ function App() {
   const [openPopup, setOpenPopup] = useState(false);
   const [canAccess, setCanAccess] = useState(false);
   const [message, setMessage] = useState("");
+
   console.log(message);
   console.log(canAccess);
-  console.log(diary);
 
   useEffect(() => {
-    let timeOut = 0;
-    const onedayInS = 5000;
+    const onedayInS = 50000;
     // const onedayInS = 1 * 24 * 60 * 60 * 1000;
-    if (timeOut) {
-      setCanAccess(false);
-      setMessage(
-        "You can save your Diary only once per day, please come black tomorrow"
-      );
-      toast.error(message);
-    } else {
-      clearTimeout(timeOut);
-      timeOut = setTimeout(() => {
-        setCanAccess(true);
-      }, onedayInS);
-    }
+    setTimeout(() => {
+      setCanAccess(true);
+    }, onedayInS);
+    setCanAccess(false);
+    setMessage("");
   }, [diary]);
 
   return (
     <div className="bg-slate-200 text-gray-100 flex flex-col h-screen">
-      <Navbar setOpenPopup={setOpenPopup} canAccess={canAccess} />
+      <Navbar
+        setOpenPopup={setOpenPopup}
+        canAccess={canAccess}
+        setMessage={setMessage}
+      />
 
       <main className="flex flex-col">
+        <DisplayDiaryCard diary={diary} canAccess={canAccess} />
         {canAccess ? (
           <Model
             isOpen={openPopup}
@@ -78,16 +51,12 @@ function App() {
               openPopup={openPopup}
               setDiary={setDiary}
               setOpenPopup={setOpenPopup}
+              setCanAccess={setCanAccess}
             />
           </Model>
         ) : (
-          <h1>{message}</h1>
+          <ErrorMessage message={message} />
         )}
-        <DisplayDiaryCard
-          diary={diary}
-          message={message}
-          canAccess={canAccess}
-        />
       </main>
       <Footer />
       <ToastContainer position="top-center" />
