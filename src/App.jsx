@@ -19,7 +19,7 @@ function App() {
   console.log(canAccess);
 
   useEffect(() => {
-    const onedayInS = 50000;
+    const onedayInS = 10000;
     // const onedayInS = 1 * 24 * 60 * 60 * 1000;
     setTimeout(() => {
       setCanAccess(true);
