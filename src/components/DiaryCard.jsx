@@ -1,19 +1,47 @@
-import { Link } from "react-router-dom";
 
-const DiaryCard = () => {
+import { useState } from "react";
+import Model from "react-modal";
+import DiaryInfo from "./DiaryInfo";
+const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
+  const [openInfo, setOpenInfo] = useState(false);
   return (
-    <div className="card w-96 bg-base-100 card-lg shadow-sm">
-      <div className="card-body">
-        <h2 className="card-title">My First Diary</h2>
-        <p>Write your first diary from now.</p>
-        <div className="justify-end card-actions">
-          <Link
-            to="/Diary" className="rounded-lg px-3 py-2 text-sm font-medium bg-black text-yellow-50 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">
-            Write New Diary
-          </Link>
+    <li className="mb-3 w-[35rem] h-[]">
+      <button
+        className="bg-blue-400 w-full p-4 rounded-4xl hover:bg-blue-300 cursor-pointer"
+        onClick={() => setOpenInfo(true)}
+      >
+        <div className="flex flex-row justify-center items-center px-[4rem]">
+          <div className="w-[7rem]">
+            <img
+              className="w-full h-auto object-cover"
+              src={imgUrl}
+              alt={title}
+            />
+          </div>
+          <div className="w-full">
+            <p className="text-sm">{newDate}</p>
+            <h2 className="font-bold text-black">{title}</h2>
+          </div>
         </div>
-      </div>
-    </div>
+      </button>
+      <Model
+        isOpen={openInfo}
+        onRequestClose={() => setOpenInfo(false)}
+        style={{
+          overlay: { background: "black" },
+          content: { width: "1140px", height: "550px" },
+        }}
+      >
+        <DiaryInfo
+          title={title}
+          newDate={newDate}
+          imgUrl={imgUrl}
+          content={message}
+          setOpenInfo={setOpenInfo}
+        />
+      </Model>
+    </li>
+
   );
 };
 
