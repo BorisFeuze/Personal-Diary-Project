@@ -1,3 +1,4 @@
+
 import Model from "react-modal";
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
@@ -63,5 +64,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Model from "react-modal";
 import DiaryInfo from "./DiaryInfo";
@@ -40,6 +41,7 @@ const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
         />
       </Model>
     </li>
+
   );
 };
 
