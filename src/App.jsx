@@ -1,3 +1,4 @@
+
 import Model from "react-modal";
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
@@ -7,6 +8,7 @@ import Footer from "./components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import ErrorMessage from "./components/ErrorMessage";
 
+
 function App() {
   const [diary, setDiary] = useState(
     JSON.parse(localStorage.getItem("diaryList")) || []
@@ -14,6 +16,7 @@ function App() {
   const [openPopup, setOpenPopup] = useState(false);
   const [canAccess, setCanAccess] = useState(false);
   const [message, setMessage] = useState("");
+
 
   console.log(message);
   console.log(canAccess);
@@ -60,6 +63,7 @@ function App() {
       </main>
       <Footer />
       <ToastContainer position="top-center" />
+
     </div>
   );
 }

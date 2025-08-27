@@ -1,3 +1,4 @@
+
 import DiaryCard from "./DiaryCard";
 
 const DisplayDiaryCard = ({ diary }) => {
@@ -8,6 +9,7 @@ const DisplayDiaryCard = ({ diary }) => {
       })}
     </ul>
   );
+
 };
 
 export default DisplayDiaryCard;
