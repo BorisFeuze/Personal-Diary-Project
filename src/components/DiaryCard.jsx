@@ -41,6 +41,7 @@ const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
         />
       </Model>
     </li>
+
   );
 
 };

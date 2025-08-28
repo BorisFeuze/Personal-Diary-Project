@@ -1,6 +1,6 @@
 const Footer = () => {
-  return (
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
+    return (
+        <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
             <aside className="grid-flow-col items-center">
                 <svg
                     width="36"
@@ -51,15 +51,7 @@ const Footer = () => {
                 </a>
             </nav>
         </footer>
-
-  );
-
-  
-
-  // <footer className="flex justify-center bg-blue-200 py-1 text-green-800 w-full">
-  //   © Copyright {new Date().getFullYear()} - Personal Diary, all right
-  //   reserved
-  // </footer>
+    );
 };
 
 export default Footer;

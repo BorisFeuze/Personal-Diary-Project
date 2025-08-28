@@ -1,12 +1,15 @@
 
-import Model from "react-modal";
+import Modal from "react-modal";
+
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
 import DiaryForm from "./components/DiaryForm";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { toast, ToastContainer } from "react-toastify";
 import ErrorMessage from "./components/ErrorMessage";
+import { ToastContainer } from "react-toastify";
+
+Modal.setAppElement("#root"); // important for accessibility
 
 
 function App() {
@@ -21,8 +24,9 @@ function App() {
   console.log(message);
   console.log(canAccess);
 
+  // If you really want a 1-day lock, uncomment this effect.
   useEffect(() => {
-    const onedayInS = 50000;
+    const onedayInS = 15000;
     // const onedayInS = 1 * 24 * 60 * 60 * 1000;
     setTimeout(() => {
       setCanAccess(true);
@@ -32,31 +36,33 @@ function App() {
   }, [diary]);
 
   return (
-    <div className="bg-slate-200 text-gray-100 flex flex-col h-screen">
+    <div className="bg-slate-200 text-gray-100 flex flex-col min-h-screen">
       <Navbar
         setOpenPopup={setOpenPopup}
         canAccess={canAccess}
         setMessage={setMessage}
       />
 
-      <main className="flex flex-col">
-        <DisplayDiaryCard diary={diary} canAccess={canAccess} />
+      <main className="flex-1 container mx-auto px-4 py-6">
+        {/* Diary list (self-contained, no props needed) */}
+        <DisplayDiaryCard />
+
         {canAccess ? (
-          <Model
+          <Modal
             isOpen={openPopup}
             onRequestClose={() => setOpenPopup(false)}
             style={{
               overlay: { background: "black" },
-              content: { width: "1140px", height: "550px" },
+              content: { width: "1140px", height: "550px", margin: "auto" },
             }}
           >
             <DiaryForm
               openPopup={openPopup}
               setDiary={setDiary}
               setOpenPopup={setOpenPopup}
-              setCanAccess={setCanAccess}
+              // setCanAccess={setCanAccess} pass only if you use the 1-day lock
             />
-          </Model>
+          </Modal>
         ) : (
           <ErrorMessage message={message} />
         )}
