@@ -43,6 +43,7 @@ const DiaryCard = ({ _id, title, newDate, imgUrl, message }) => {
     </li>
 
   );
+
 };
 
 export default DiaryCard;

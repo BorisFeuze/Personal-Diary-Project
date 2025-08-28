@@ -1,4 +1,6 @@
+
 import Modal from "react-modal";
+
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
 import DiaryForm from "./components/DiaryForm";
@@ -9,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 
 Modal.setAppElement("#root"); // important for accessibility
 
+
 function App() {
   const [diary, setDiary] = useState(
     JSON.parse(localStorage.getItem("diaryList")) || []
@@ -16,6 +19,7 @@ function App() {
   const [openPopup, setOpenPopup] = useState(false);
   const [canAccess, setCanAccess] = useState(false);
   const [message, setMessage] = useState("");
+
 
   console.log(message);
   console.log(canAccess);
@@ -65,6 +69,7 @@ function App() {
       </main>
       <Footer />
       <ToastContainer position="top-center" />
+
     </div>
   );
 }

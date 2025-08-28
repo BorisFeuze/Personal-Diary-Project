@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from "react";
 
 const LS_KEY = "diaryList";
@@ -29,6 +30,7 @@ const DisplayDiaryCard = () => {
       return tb - ta;
     });
   }, [diaries]);
+
 
   return (
     <section className="space-y-6">
@@ -141,6 +143,7 @@ const DisplayDiaryCard = () => {
       )}
     </section>
   );
+
 };
 
 export default DisplayDiaryCard;
