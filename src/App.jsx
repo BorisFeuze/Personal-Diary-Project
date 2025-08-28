@@ -1,4 +1,3 @@
-
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
@@ -9,7 +8,6 @@ import ErrorMessage from "./components/ErrorMessage";
 import { ToastContainer } from "react-toastify";
 
 Modal.setAppElement("#root"); // important for accessibility
-
 
 function App() {
   const [diary, setDiary] = useState(
@@ -23,15 +21,15 @@ function App() {
   console.log(canAccess);
 
   // If you really want a 1-day lock, uncomment this effect.
-  //useEffect(() => {
-  // const onedayInS = 10000;
-  // const onedayInS = 1 * 24 * 60 * 60 * 1000;
-  // setTimeout(() => {
-  //   setCanAccess(true);
-  // }, onedayInS);
-  // setCanAccess(false);
-  // setMessage("");
-  //}, [diary]);
+  useEffect(() => {
+    const onedayInS = 15000;
+    // const onedayInS = 1 * 24 * 60 * 60 * 1000;
+    setTimeout(() => {
+      setCanAccess(true);
+    }, onedayInS);
+    setCanAccess(false);
+    setMessage("");
+  }, [diary]);
 
   return (
     <div className="bg-slate-200 text-gray-100 flex flex-col min-h-screen">
@@ -46,7 +44,7 @@ function App() {
         <DisplayDiaryCard />
 
         {canAccess ? (
-          <Model
+          <Modal
             isOpen={openPopup}
             onRequestClose={() => setOpenPopup(false)}
             style={{
@@ -58,9 +56,9 @@ function App() {
               openPopup={openPopup}
               setDiary={setDiary}
               setOpenPopup={setOpenPopup}
-            // setCanAccess={setCanAccess} pass only if you use the 1-day lock
+              // setCanAccess={setCanAccess} pass only if you use the 1-day lock
             />
-          </Model>
+          </Modal>
         ) : (
           <ErrorMessage message={message} />
         )}
@@ -70,6 +68,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
