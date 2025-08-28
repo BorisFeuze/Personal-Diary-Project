@@ -1,18 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const LS_KEY = "diaryList";
 
-const DisplayDiaryCard = () => {
-  const [diaries, setDiaries] = useState([]);
+const DisplayDiaryCard = ({ diaries, setDiaries }) => {
   const [active, setActive] = useState(null); // for detail view
 
-  // Load once on mount
-  useEffect(() => {
-    const raw = localStorage.getItem(LS_KEY);
-    setDiaries(raw ? JSON.parse(raw) : []);
-  }, []);
-
-  // Delete one diary
+  // Delete one diary (updates parent state + localStorage)
   const handleDelete = (id) => {
     if (!confirm("Delete this diary?")) return;
     const next = diaries.filter((d) => d._id !== id);
@@ -34,7 +27,6 @@ const DisplayDiaryCard = () => {
     <section className="space-y-6">
       <h2 className="text-xl font-semibold text-black">Your Diaries</h2>
 
-      {/* Empty state */}
       {!sorted.length ? (
         <div className="text-center text-black/60 py-10">
           No diaries yet. Add one to see it here.
@@ -92,7 +84,7 @@ const DisplayDiaryCard = () => {
         </ul>
       )}
 
-      {/* Simple detail modal */}
+      {/* Detail modal */}
       {active && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
           <div className="max-w-2xl w-full bg-white text-black rounded-xl shadow-lg">
