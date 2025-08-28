@@ -109,12 +109,12 @@ const DiaryForm = ({ openPopup, setDiary, setOpenPopup }) => {
             </div>
           </label>
           <div className="flex flex-row justify-center gap-x-10 ml-[3em] w-full">
-            <buttton
+            <button
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400 active:bg-red-300 cursor-pointer"
               onClick={() => setOpenPopup(false)}
             >
               Cancel
-            </buttton>
+            </button>
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer "
