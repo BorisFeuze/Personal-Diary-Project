@@ -54,7 +54,7 @@ function App() {
         <DisplayDiaryCard diaries={diary} setDiaries={setDiary} />
 
         {canAccess ? (
-          <Modal
+          
           <Modal
             isOpen={openPopup}
             onRequestClose={() => setOpenPopup(false)}
@@ -70,7 +70,7 @@ function App() {
               // setCanAccess={setCanAccess} pass only if you use the 1-day lock
             />
           </Modal>
-          </Modal>
+          
         ) : (
           <ErrorMessage message={message} />
         )}
