@@ -23,6 +23,7 @@ const DisplayDiaryCard = ({ diaries, setDiaries }) => {
     });
   }, [diaries]);
 
+
   return (
     <section className="space-y-6">
       <h2 className="text-xl font-semibold text-black">Your Diaries</h2>
@@ -133,6 +134,7 @@ const DisplayDiaryCard = ({ diaries, setDiaries }) => {
       )}
     </section>
   );
+
 };
 
 export default DisplayDiaryCard;

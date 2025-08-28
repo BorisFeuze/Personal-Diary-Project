@@ -1,5 +1,6 @@
 
 import Modal from "react-modal";
+
 import { useEffect, useState } from "react";
 import DisplayDiaryCard from "./components/DisplayDiaryCard";
 import DiaryForm from "./components/DiaryForm";
@@ -20,6 +21,7 @@ function App() {
   const [openPopup, setOpenPopup] = useState(false);
   const [canAccess, setCanAccess] = useState(false);
   const [message, setMessage] = useState("");
+
 
   console.log(message);
   console.log(canAccess);
@@ -53,6 +55,7 @@ function App() {
 
         {canAccess ? (
           <Modal
+          <Modal
             isOpen={openPopup}
             onRequestClose={() => setOpenPopup(false)}
             style={{
@@ -64,8 +67,9 @@ function App() {
               openPopup={openPopup}
               setDiary={setDiary}
               setOpenPopup={setOpenPopup}
-              setCanAccess={setCanAccess} //pass only if you use the 1-day lock
+              // setCanAccess={setCanAccess} pass only if you use the 1-day lock
             />
+          </Modal>
           </Modal>
         ) : (
           <ErrorMessage message={message} />
@@ -73,9 +77,9 @@ function App() {
       </main>
       <Footer />
       <ToastContainer position="top-center" />
+
     </div>
   );
 }
-
 
 export default App;
