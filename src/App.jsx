@@ -16,6 +16,8 @@ function App() {
   const [diary, setDiary] = useState(
     JSON.parse(localStorage.getItem("diaryList")) || []
   );
+
+
   const [openPopup, setOpenPopup] = useState(false);
   const [canAccess, setCanAccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -26,14 +28,17 @@ function App() {
 
   // If you really want a 1-day lock, uncomment this effect.
   useEffect(() => {
-    const onedayInS = 15000;
-    // const onedayInS = 1 * 24 * 60 * 60 * 1000;
+    const onedayInS = 15000; //just for test
+    //const onedayInS = 1 * 24 * 60 * 60 * 1000;
     setTimeout(() => {
       setCanAccess(true);
     }, onedayInS);
     setCanAccess(false);
     setMessage("");
   }, [diary]);
+
+  // whenever you add a diary in DiaryForm:
+  // setDiaries([...diaries, newDiary]) and update localStorage
 
   return (
     <div className="bg-slate-200 text-gray-100 flex flex-col min-h-screen">
@@ -44,10 +49,12 @@ function App() {
       />
 
       <main className="flex-1 container mx-auto px-4 py-6">
-        {/* Diary list (self-contained, no props needed) */}
-        <DisplayDiaryCard />
+
+
+        <DisplayDiaryCard diaries={diary} setDiaries={setDiary} />
 
         {canAccess ? (
+          <Modal
           <Modal
             isOpen={openPopup}
             onRequestClose={() => setOpenPopup(false)}
@@ -62,6 +69,7 @@ function App() {
               setOpenPopup={setOpenPopup}
               // setCanAccess={setCanAccess} pass only if you use the 1-day lock
             />
+          </Modal>
           </Modal>
         ) : (
           <ErrorMessage message={message} />
